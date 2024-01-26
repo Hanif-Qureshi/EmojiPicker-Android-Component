@@ -55,7 +55,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setListener() {
         binding.actionShow.setOnClickListener {
+             val existingFragment =
+            supportFragmentManager.findFragmentByTag(EmojiBottomSheet.TAG) as EmojiBottomSheet?
+
+        if (existingFragment != null && existingFragment.isAdded) {
+            // Fragment is already added, dismiss it
+            existingFragment.dismiss()
+        } else {
+            // Fragment is not added or null, show the new fragment
             emojiBottomSheetDialogFragment?.show(supportFragmentManager, EmojiBottomSheet.TAG)
+        }
         }
     }
 }
